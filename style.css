@@ -50,6 +50,43 @@ h1 {
     font-weight: bold;
 }
 
+.generateBtn {
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    transition: all 0.3s ease;
+
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.generateBtn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.5);
+
+    animation: pulse 1s infinite alternate;
+}
+
+.generateBtn:active {
+    transform: scale(0.95);
+}
+
+@keyframes pulse {
+    from {
+        transform: translateY(-5px) scale(1);
+    }
+
+    to {
+        transform: translateY(-5px) scale(1.05);
+    }
+}
+
 button {
     border: none;
     padding: 15px 25px;

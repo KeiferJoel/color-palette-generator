@@ -4,41 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Palette Generator</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    >
 </head>
 <body>
 
-    <div class="container">
-        <h1>Color Palette Generator</h1>
+    <div class="bg-blur blur-1"></div>
+    <div class="bg-blur blur-2"></div>
 
-        <div class="palette" id="palette">
-            <div class="color-box">
-                <span>#FFFFFF</span>
-            </div>
+    <main class="container">
 
-            <div class="color-box">
-                <span>#FFFFFF</span>
-            </div>
+        <header>
 
-            <div class="color-box">
-                <span>#FFFFFF</span>
-            </div>
+            <h1>
+                Color <span>Palette</span> Generator
+            </h1>
 
-            <div class="color-box">
-                <span>#FFFFFF</span>
-            </div>
+            <p>
+                Generate beautiful color palettes and copy HEX codes with one click.
+            </p>
 
-            <div class="color-box">
-                <span>#FFFFFF</span>
-            </div>
-        </div>
+            <div class="line"></div>
 
-        <button id="generateBtn" class="generateBtn">
-            Generate Palette
+        </header>
+
+        <section class="palette" id="palette">
+
+        </section>
+
+        <button id="generateBtn">
+
+            <i class="fa-solid fa-rotate"></i>
+
+            Generate New Palette
+
         </button>
+
+        <p class="tip">
+            Press <kbd>Space</kbd> to generate a new palette
+        </p>
+
+        <footer>
+            Made with 💜 by Joel Pichardo (Keifer Joel)
+        </footer>
+
+    </main>
+
+    <div id="toast">
+        Color copied successfully!
     </div>
 
     <script src="script.js"></script>
 
 </body>
-</html>  
+</html>

@@ -33,10 +33,10 @@
 
 ## 🚀 Live Demo
 
-> Add your GitHub Pages link here.
+
 
 ```text
-https://yourusername.github.io/color-palette-generator/
+🔗 https://keiferjoel.github.io/color-palette-generator/
 ```
 
 ---
@@ -56,9 +56,6 @@ https://yourusername.github.io/color-palette-generator/
 ```text
 Color-Palette-Generator
 │
-├── assets
-│   ├── images
-│   └── icons
 │
 ├── index.html
 ├── style.css

@@ -1,6 +1,7 @@
 const palette = document.getElementById("palette");
 const generateBtn = document.getElementById("generateBtn");
 const toast = document.getElementById("toast");
+const themeToggle = document.getElementById("themeToggle"); // NUEVO
 
 function randomColor(){
 
@@ -100,3 +101,40 @@ document.addEventListener(
 );
 
 generatePalette();
+
+/* ============================
+   NUEVO: lógica del tema oscuro
+   ============================ */
+
+function switchTheme(){
+
+    document.documentElement.classList.toggle("dark");
+
+    const isDark = document.documentElement.classList.contains("dark");
+
+    themeToggle.innerHTML = isDark
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+
+}
+
+// Respeta la preferencia guardada al cargar la página
+if(localStorage.getItem("theme") === "light"){
+
+    document.documentElement.classList.remove("dark");
+    themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+
+}
+
+themeToggle.addEventListener("click", ()=>{
+
+    if(!document.startViewTransition){
+        switchTheme();
+        return;
+    }
+
+    document.startViewTransition(switchTheme);
+
+});

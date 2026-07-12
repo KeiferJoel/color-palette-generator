@@ -7,11 +7,36 @@
     font-family:Inter,sans-serif;
 }
 
+/* NUEVO: variables de tema. Por defecto (:root) = claro, .dark = oscuro */
+:root{
+    --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+    --bg:#f4f5f8;
+    --text:#12141c;
+    --text-secondary:#5b6472;
+    --text-tip:#6b7280;
+    --text-footer:#6b7280;
+    --info-bg:rgba(255,255,255,.85);
+    --kbd-bg:#e5e7eb;
+    --kbd-text:#111827;
+}
+
+html.dark{
+    --bg:#050816;
+    --text:#ffffff;
+    --text-secondary:#b0b7c3;
+    --text-tip:#9aa4b2;
+    --text-footer:#8b90a0;
+    --info-bg:rgba(20,20,30,.85);
+    --kbd-bg:#111827;
+    --kbd-text:#e5e7eb;
+}
+
 body{
 
     min-height:100vh;
-    background:#050816;
-    color:white;
+    background:var(--bg);
+    color:var(--text);
 
     display:flex;
     justify-content:center;
@@ -19,6 +44,8 @@ body{
 
     overflow:hidden;
     position:relative;
+
+    transition: background .3s ease, color .3s ease;
 }
 
 .bg-blur{
@@ -47,6 +74,40 @@ body{
     right:-100px;
 }
 
+/* NUEVO: botón de cambio de tema */
+.theme-toggle{
+
+    position:fixed;
+    top:25px;
+    left:25px;
+
+    width:50px;
+    height:85px;
+
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:50%;
+
+    background:var(--info-bg);
+    color:var(--text);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+    z-index:10;
+
+    transition:background .3s ease, color .3s ease, transform .3s ease;
+}
+
+.theme-toggle:hover{
+    transform:scale(1.1);
+}
+
+.theme-toggle i{
+    font-size:18px;
+}
+
 .container{
 
     width:min(1200px,90%);
@@ -63,21 +124,47 @@ header h1{
 
 header span{
 
-    background:linear-gradient(
-        90deg,
+    background: linear-gradient(
+        135deg,
         #ec4899,
         #8b5cf6,
-        #22d3ee
+        #22d3ee,
+        #8b5cf6,
+        #ec4899
     );
 
-    -webkit-background-clip:text;
-    color:transparent;
+    background-size: 400%;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientFlow 8s ease infinite;
+
+}
+
+@keyframes gradientFlow{
+
+    0%{
+        background-position: 0%;
+    }
+
+    50%{
+        background-position: 100%;
+    }
+
+    100%{
+        background-position: 0%;
+    }
+
 }
 
 header p{
 
     margin-top:20px;
-    color:#b0b7c3;
+    color:var(--text-secondary);
     font-size:1.1rem;
 }
 
@@ -136,7 +223,7 @@ header p{
 
     height:15%;
 
-    background:rgba(20,20,30,.85);
+    background:var(--info-bg);
 
     display:flex;
 
@@ -146,6 +233,7 @@ header p{
     padding:0 20px;
 
     font-weight:600;
+    transition:background .3s ease;
 }
 
 .info i{
@@ -187,23 +275,26 @@ button:hover{
 
     margin-top:25px;
 
-    color:#9aa4b2;
+    color:var(--text-tip);
 }
 
 kbd{
 
-    background:#111827;
+    background:var(--kbd-bg);
+    color:var(--kbd-text);
 
     padding:8px 12px;
 
     border-radius:10px;
+
+    transition:background .3s ease, color .3s ease;
 }
 
 footer{
 
     margin-top:50px;
 
-    color:#8b90a0;
+    color:var(--text-footer);
 }
 
 #toast{
@@ -216,6 +307,7 @@ footer{
     transform:translateX(-50%) translateY(100px);
 
     background:#111827;
+    color:#fff;
 
     padding:16px 30px;
 
@@ -266,4 +358,31 @@ footer{
 
         height:200px;
     }
+}
+
+/* NUEVO: animación de transición circular para el cambio de tema */
+::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+::view-transition-new(root) {
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><filter id="blur"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="0" cy="0" r="18" fill="white" filter="url(%23blur)"/></svg>') top left / 0 no-repeat;
+  mask-origin: content-box;
+  animation: scale 1s;
+  animation-fill-mode: both;
+  transform-origin: top left;
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: scale 1s;
+  animation-fill-mode: both;
+  transform-origin: top left;
+  z-index: -1;
+}
+
+@keyframes scale {
+  to {
+    mask-size: 350vmax;
+  }
 }
